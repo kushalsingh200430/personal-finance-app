@@ -10,6 +10,7 @@ import userRoutes from './routes/users';
 import loanRoutes from './routes/loans';
 import expenseRoutes from './routes/expenses';
 import taxRoutes from './routes/tax';
+import panRoutes from './routes/pan';
 
 // Import middleware
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
