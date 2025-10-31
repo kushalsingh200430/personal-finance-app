@@ -92,6 +92,6 @@ export const validateIncome = (income: number): boolean => {
 
 export const validateFiscalYear = (fiscalYear: string): boolean => {
   // Format should be YYYY-YY (e.g., 2024-25)
-  const fy Regex = /^\d{4}-\d{2}$/;
+  const fyRegex = /^\d{4}-\d{2}$/;
   return fyRegex.test(fiscalYear);
 };
