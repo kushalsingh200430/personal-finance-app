@@ -3,6 +3,7 @@ import { query } from '../config/database';
 import { calculateTaxLiability, validateTaxDataForFiling, validateDeductionLimits } from '../utils/taxCalculator';
 import { submitITR1 } from '../services/govApiService';
 import { sendTaxFilingConfirmation } from '../services/emailService';
+import * as panService from '../services/panService';
 import { AuthenticatedRequest } from '../middleware/authenticate';
 import { v4 as uuidv4 } from 'uuid';
 
