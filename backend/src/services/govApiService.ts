@@ -103,7 +103,7 @@ const submitToGovernmentAPI = async (
       {
         xml: itrXML,
         pan: data.pan,
-        aadh aar: data.aadhaar
+        aadhaar: data.aadhaar
       },
       {
         headers: {
