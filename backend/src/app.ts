@@ -35,6 +35,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/loans', loanRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/tax', taxRoutes);
+app.use('/api/pan', panRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
