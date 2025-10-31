@@ -192,6 +192,15 @@ export const submitITR = async (req: AuthenticatedRequest, res: Response): Promi
       return;
     }
 
+    // Verify PAN is verified
+    if (user.pan_verification_status !== 'verified') {
+      res.status(400).json({
+        success: false,
+        error: 'PAN must be verified before filing ITR. Please verify your PAN in the profile section.'
+      });
+      return;
+    }
+
     // Get tax data
     const taxResult = await query(
       'SELECT * FROM tax_data WHERE user_id = $1 AND fiscal_year = $2',
