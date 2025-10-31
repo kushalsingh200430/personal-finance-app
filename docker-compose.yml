@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: pocket-guard-db
+    environment:
+      POSTGRES_USER: pocket_guard_user
+      POSTGRES_PASSWORD: postgres_password_123
+      POSTGRES_DB: pocket_guard_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pocket-guard-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pocket-guard-backend
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://pocket_guard_user:postgres_password_123@postgres:5432/pocket_guard_db
+      JWT_SECRET: your_jwt_secret_key_change_in_production
+      PORT: 3001
+      FRONTEND_URL: http://localhost:3000
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+    networks:
+      - pocket-guard-network
+    command: npm run dev
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pocket-guard-frontend
+    environment:
+      REACT_APP_API_URL: http://localhost:3001/api
+      REACT_APP_ENV: development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - pocket-guard-network
+    command: npm start
+
+volumes:
+  postgres_data:
+
+networks:
+  pocket-guard-network:
+    driver: bridge
